@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/tes1', function () {
+    return Inertia::render('Tes', [
+        'header' => 'halaman 1'
+    ]);
+});
+
+Route::get('/tes2', function () {
+    return Inertia::render('Tes', [
+        'header' => 'halaman 2'
+    ]);
+});
+
+Route::get('/tes3', function () {
+    return Inertia::render('Tes', [
+        'header' => 'halaman 3'
+    ]);
 });
