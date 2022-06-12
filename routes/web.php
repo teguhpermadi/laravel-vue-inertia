@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,20 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tes1', function () {
-    return Inertia::render('Tes', [
-        'header' => 'halaman 1'
-    ]);
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/tes2', function () {
-    return Inertia::render('Tes', [
-        'header' => 'halaman 2'
-    ]);
-});
-
-Route::get('/tes3', function () {
-    return Inertia::render('Tes', [
-        'header' => 'halaman 3'
-    ]);
-});
+require __DIR__.'/auth.php';
