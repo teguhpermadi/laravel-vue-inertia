@@ -6,28 +6,33 @@
           <!-- <img src="../assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2"> -->
           <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span></h4>
           <p class="text-muted">Before you get started, you must login or register if you don't already have an account.</p>
-          <form method="POST" action="#" class="needs-validation" novalidate="">
+          <form  @submit.prevent="form.post('login')">
             <div class="form-group">
               <label for="email">Email</label>
-              <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
-              <div class="invalid-feedback">
+              <input type="text" v-model="form.email" class="form-control" >
+              <div v-if="form.errors.email">{{ form.errors.email }}</div>
+              <!-- <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus> -->
+              <!-- <div class="invalid-feedback">
                 Please fill in your email
-              </div>
+              </div> -->
             </div>
 
             <div class="form-group">
               <div class="d-block">
                 <label for="password" class="control-label">Password</label>
               </div>
-              <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-              <div class="invalid-feedback">
+              <input type="password" v-model="form.password" class="form-control">
+              <div v-if="form.errors.password">{{ form.errors.password }}</div>
+              <!-- <input id="password" type="password" class="form-control" name="password" tabindex="2" required> -->
+              <!-- <div class="invalid-feedback">
                 please fill in your password
-              </div>
+              </div> -->
             </div>
 
             <div class="form-group">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                <input type="checkbox" v-model="form.remember_me" class="custom-control-input">
+                <!-- <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember_me"> -->
                 <label class="custom-control-label" for="remember-me">Remember Me</label>
               </div>
             </div>
@@ -36,13 +41,16 @@
               <a href="auth-forgot-password.html" class="float-left mt-3">
                 Forgot Password?
               </a>
-              <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+              <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right">Login</button>
+              <!-- <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                 Login
-              </button>
+              </button> -->
             </div>
 
             <div class="mt-5 text-center">
-              Don't have an account? <a href="auth-register.html">Create new one</a>
+              Don't have an account? 
+              <a href="auth-register.html">Create new one</a>
+              <Link></Link>
             </div>
           </form>
 
@@ -70,3 +78,23 @@
     </div>
   </section>
 </template>
+
+<script>
+import { Link } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/inertia-vue3'
+
+export default {
+  props: {
+        errors: Object
+  },
+  setup () {
+    const form = useForm({
+      email: null,
+      password: null,
+      remember_me: false,
+    })
+
+    return { form }
+  },
+}
+</script>
