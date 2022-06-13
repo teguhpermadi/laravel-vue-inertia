@@ -1,7 +1,33 @@
 import './bootstrap';
-
 import Alpine from 'alpinejs';
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { InertiaProgress } from '@inertiajs/progress'
 
-window.Alpine = Alpine;
+// window.Alpine = Alpine;
 
-Alpine.start();
+// Alpine.start();
+
+createInertiaApp({
+    resolve: name => require(`./Pages/${name}`),
+    setup({ el, App, props, plugin }) {
+      createApp({ render: () => h(App, props) })
+        .use(plugin)
+        .mount(el)
+    },
+  })
+  
+  InertiaProgress.init({
+    // The delay after which the progress bar will
+    // appear during navigation, in milliseconds.
+    delay: 250,
+  
+    // The color of the progress bar.
+    color: 'red',
+  
+    // Whether to include the default NProgress styles.
+    includeCSS: true,
+  
+    // Whether the NProgress spinner will be shown.
+    showSpinner: true,
+  })
