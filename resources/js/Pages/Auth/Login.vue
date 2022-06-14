@@ -6,11 +6,11 @@
           <!-- <img src="../assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2"> -->
           <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span></h4>
           <p class="text-muted">Before you get started, you must login or register if you don't already have an account.</p>
-          <form  @submit.prevent="form.post('login')">
+          <form  @submit.prevent="form.post('login')" :class="{'was-validated' : validated }">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="text" v-model="form.email" class="form-control" >
-              <div v-if="form.errors.email">{{ form.errors.email }}</div>
+              <input type="text" v-model="form.email" class="form-control" :class="{'is-invalid' : form.errors.email }" required>
+              <div v-if="form.errors.email" class="invalid-feedback">{{ form.errors.email }}</div>
               <!-- <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus> -->
               <!-- <div class="invalid-feedback">
                 Please fill in your email
@@ -21,8 +21,8 @@
               <div class="d-block">
                 <label for="password" class="control-label">Password</label>
               </div>
-              <input type="password" v-model="form.password" class="form-control">
-              <div v-if="form.errors.password">{{ form.errors.password }}</div>
+              <input type="password" v-model="form.password" class="form-control" :class="{'is-invalid' : form.errors.password }" required>
+              <div v-if="form.errors.password" class="invalid-feedback">{{ form.errors.password }}</div>
               <!-- <input id="password" type="password" class="form-control" name="password" tabindex="2" required> -->
               <!-- <div class="invalid-feedback">
                 please fill in your password
@@ -87,14 +87,19 @@ export default {
   props: {
         errors: Object
   },
+   data() {
+    return {
+      validated : false,
+    }
+  },
   setup () {
     const form = useForm({
       email: null,
       password: null,
       remember_me: false,
     })
-
     return { form }
   },
+
 }
 </script>
