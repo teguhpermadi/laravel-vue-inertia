@@ -17,6 +17,19 @@
           <a href="#" class="dropdown-item has-icon text-danger">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>
+          <Link :href="route('logout')" method="post" class="dropdown-item has-icon text-danger">Logout</Link>
         </div>
       </li>
 </template>
+<script>
+import { Link } from '@inertiajs/inertia-vue3'
+
+export default {
+  components: {
+    Link,
+},
+  props: {
+    
+  }
+}
+</script>
