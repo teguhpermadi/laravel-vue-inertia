@@ -49,8 +49,8 @@
 
             <div class="mt-5 text-center">
               Don't have an account? 
-              <a href="auth-register.html">Create new one</a>
-              <Link></Link>
+              <!-- <a href="auth-register.html">Create new one</a> -->
+              <Link :href="route('register')">Create new one</Link>
             </div>
           </form>
 
@@ -92,6 +92,9 @@ export default {
       validated : false,
     }
   },
+   components: {
+        Link
+  },
   setup () {
     const form = useForm({
       email: null,
@@ -100,7 +103,5 @@ export default {
     })
     return { form }
   },
-  
-
 }
 </script>
